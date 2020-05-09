@@ -22,7 +22,7 @@ def descripteurs():
 # Common descriptors
     Time_serie_1.mean()
     # Time_serie_1.plot_serie()
-    Time_serie_1.std()
+    # Time_serie_1.std()
     Time_serie_1.min()
     Time_serie_1.max()
     Time_serie_1.median()
