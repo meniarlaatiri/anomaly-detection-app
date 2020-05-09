@@ -1,0 +1,47 @@
+<app-navbar></app-navbar>
+  
+  <main role="main">
+  
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron" style="background-image:url(assets/capture6.jpg);background-size:cover;">
+      <div class="container">
+        <h1 class="display-3"><strong>BIENVENUE!</strong></h1>
+
+        <p>Cette application Web vous permet d'analyser vos données,<br>
+         dégager leurs caractéristiques et détecter les anomalies qu'ils contiennent.</p>
+      </div>
+    </div>
+  
+    <div class="container">
+      <form [formGroup]="myForm" (ngSubmit)="savefile()">
+        <div class="form-group">
+      
+
+        <div class="form-group">
+          <label for="format_date">Format de date</label>
+          <input type="text" class="form-control"  placeholder="Format de date" formControlName="format_date">
+          </div>
+        </div>
+
+       
+        
+        <br>
+        <div class="form-group">
+          <label for="file_load">Télécharger votre fichier csv</label><br>
+          <input type="file"  accept=".csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel" (change)="onFileSelected($event)" name='file' >
+        </div>
+        <button type="submit"  value="Send" class="btn btn-info">Submit</button>
+      </form>
+  
+      <hr>
+  
+  </div> <!-- /container -->
+    
+  
+  </main>
+
+<app-footer></app-footer>
+<div>
+  {{row_descripteur.min}}
+</div>
+
