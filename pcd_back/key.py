@@ -132,3 +132,25 @@ class NpEncoder(json.JSONEncoder):
 def to_json(mydict):
   metadata= json.dumps(mydict, cls=NpEncoder)
   return metadata 
+
+
+def get_window(series, backward=5, forward=0, slide=1, pad=False):
+    series = list(series)
+    s_len = len(series)
+    sliding_window = []
+
+    if pad:
+        for i in range(backward):
+            window = [np.nan for i in range(backward + 1 + forward)]
+            sliding_window.append(window)
+
+    for i in range(backward, s_len - forward, slide):
+        window = series[i - backward:i + forward + 1]
+        sliding_window.append(window)
+
+    if pad:
+        for i in range(forward):
+            window = [np.nan for i in range(backward + 1 + forward)]
+            sliding_window.append(window)
+
+    return np.array(sliding_window)
