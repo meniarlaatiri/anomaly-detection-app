@@ -9,13 +9,12 @@ import { HttpClient } from '@angular/common/http';
 })
 export class DescriptionComponent implements OnInit {
 
-  public row_descripteur : any = "";
+  public row_descripteur: any = "";
 
   constructor() { }
 
   ngOnInit(): void {
     this.row_descripteur = localStorage.getItem("data");
-
     this.row_descripteur = JSON.parse(this.row_descripteur);
   }
 

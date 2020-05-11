@@ -1,4 +1,9 @@
 <app-navbar></app-navbar>
+<style>
+   h1{
+        text-align:center;
+    }
+</style>
 <main role="main">
   
     <!-- Main jumbotron for a primary marketing message or call to action -->
@@ -7,8 +12,74 @@
             <br><br><br><br><br> <br>    
           </div>
     </div>
+    <div class="container">
+        <h1>Analyse de la série Temporelle</h1><br>
+        <div class="table-responsive">
+          <table class="table">
+            <tr>
+                <th>Nom de descripteur</th>
+                <th>Descripteur</th>
+            </tr>
+            <tr>
+                <td>Minimum</td>
+                <td> {{row_descripteur.min}}</td>
+            </tr>
+            <tr>
+                <td>Maximum</td>
+                <td> {{row_descripteur.max}}</td>
+            </tr>
+            <tr>
+                <td>Médiane</td>
+                <td> {{row_descripteur.median}}</td>
+            </tr>
+            <tr>
+                <td>Variance</td>
+                <td> {{row_descripteur.variance}}</td>
+            </tr>
+            <tr>
+                <td>Moyenne</td>
+                <td> {{row_descripteur.mean}}</td>
+            </tr>
+            <tr>
+                <td>Ecart-type</td>
+                <td> {{row_descripteur.std}}</td>
+            </tr>
+            <tr>
+                <td>q(MA model)</td>
+                <td>{{row_descripteur.q_value_for_MA}}</td>
+            </tr>
+            <tr>
+                <td>p(AR model)</td>
+                <td>{{row_descripteur.p_value_for_AR}}</td>
+            </tr>
+            <tr>
+                <td>Stationnarité</td>
+                <td><strong>{{row_descripteur.stationnarity}}</strong></td>
+            </tr>
+            <tr>
+                <td>La régression linéaire du tendance</td>
+                <td><strong>Slope : </strong> {{row_descripteur.linear_regression_slope}}<br><strong>Intercept : </strong> {{row_descripteur.linear_regression_intercept}}</td>
+            </tr>
+            <tr>
+                <td>La période du saisonnalité</td>
+                <td>{{row_descripteur.seasonality}}</td>
+            </tr>
+            <tr>
+                <td>Un nombre de quantiles pour le résidu</td>
+                <td>{{row_descripteur.residual_quantiles}}</td>
+            </tr>
+          </table>
+        </div>
+    </div>
+    <br>
+    <div class="container">
+        <h1>Détéction des anomalies pour la série Temporelle</h1><br>
+    </div>
+    
+
+
+
     
 </main>
 <hr>
 <app-footer></app-footer>
-{{row_descripteur.min}}
