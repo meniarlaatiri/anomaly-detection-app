@@ -49,7 +49,7 @@ def upload():
     Time_serie_1.p_value_AR_model()
     # Time_serie_1.AR_model()
     # Time_serie_1.MA_model()
-    # Time_serie_1.fourier_spectrum()
+    Time_serie_1.fourier_spectrum()
     # Time_serie_1.fourier_initial()
     
     # Stationnarity test

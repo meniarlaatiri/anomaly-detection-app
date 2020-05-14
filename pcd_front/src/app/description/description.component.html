@@ -1,8 +1,12 @@
 <app-navbar></app-navbar>
+
+
 <style>
    h1{
         text-align:center;
     }
+    table { table-layout: fixed; }
+    
 </style>
 <main role="main">
   
@@ -12,20 +16,34 @@
             <br><br><br><br><br> <br>    
           </div>
     </div>
-    <div class="container">
-        <h1>Analyse de la série Temporelle</h1><br>
+       <div class="container">
+         <h1>Visualisation de la série Temporelle</h1><br>
+         <div style="width:1150px;">
+        
+                <canvas id="DChart"></canvas>
+            
+            </div>
+        </div>
+
+    <br>
+        
+     <div class="container">
+            <h1>Analyse de la série Temporelle</h1><br>
         <div class="table-responsive">
           <table class="table">
+          <thead>
             <tr>
-                <th>Nom de descripteur</th>
-                <th>Descripteur</th>
+                <th style="width: 40%">Nom de descripteur</th>
+                <th style="width: 70%">Valeur</th>
             </tr>
+            </thead>
+        <tbody> 
             <tr>
-                <td>Minimum</td>
+                <td >Minimum</td>
                 <td> {{row_descripteur.min}}</td>
             </tr>
             <tr>
-                <td>Maximum</td>
+                <td >Maximum</td>
                 <td> {{row_descripteur.max}}</td>
             </tr>
             <tr>
@@ -53,21 +71,26 @@
                 <td>{{row_descripteur.p_value_for_AR}}</td>
             </tr>
             <tr>
-                <td>Stationnarité</td>
-                <td><strong>{{row_descripteur.stationnarity}}</strong></td>
+                <td style="color:rgb(51, 161, 255);"><strong>Stationnarité</strong></td>
+                <td style="color:rgb(51, 161, 255);"><strong>{{row_descripteur.stationnarity}}</strong></td>
             </tr>
             <tr>
                 <td>La régression linéaire du tendance</td>
-                <td><strong>Slope : </strong> {{row_descripteur.linear_regression_slope}}<br><strong>Intercept : </strong> {{row_descripteur.linear_regression_intercept}}</td>
+                <td> <strong>Une droite linéaire d'équation : y= "slope" x + "intercept"</strong> <br><strong>Slope : </strong> {{row_descripteur.linear_regression_slope}}<br><strong>Intercept : </strong> {{row_descripteur.linear_regression_intercept}}</td>
             </tr>
             <tr>
                 <td>La période du saisonnalité</td>
                 <td>{{row_descripteur.seasonality}}</td>
             </tr>
             <tr>
-                <td>Un nombre de quantiles pour le résidu</td>
+                <td>Les vingts quantiles du résidu</td>
                 <td>{{row_descripteur.residual_quantiles}}</td>
             </tr>
+            <tr>
+                <td> La distribution de probabilité la mieux adaptée aux données</td>
+                <td>{{row_descripteur.distribution_fitted}}<br><strong>Les paramètres de cette distribution : </strong> {{row_descripteur.Parameters}}</td>
+            </tr>
+            </tbody>
           </table>
         </div>
     </div>
@@ -75,11 +98,8 @@
     <div class="container">
         <h1>Détéction des anomalies pour la série Temporelle</h1><br>
     </div>
-    
-
-
-
-    
+ 
 </main>
+
 <hr>
 <app-footer></app-footer>

@@ -41,6 +41,16 @@ class TS_Featurizing :
      dateparse = lambda x: datetime.strptime(x,self.date_format)
      df = pd.read_csv('instance\\uploads\\'+ self.src, parse_dates=[self.x_src], date_parser=dateparse,usecols=[self.x_src,self.y_src], index_col=0, sep=';')
      df= df.dropna()
+     y=df[self.y_src].values.tolist()
+     x=df.index.strftime(self.date_format).tolist()
+     data=[]
+     for i in range(len(x)):
+       di=[]
+       di.append(x[i]) 
+       di.append(y[i])    
+       data.append(di)
+     k=json.dumps([{'x':x,'y':y} for x,y in data])
+     self.values['dataset']=k
      return df
 
   # simple line plot
@@ -285,6 +295,8 @@ class NSFeaturizing (TS_Featurizing):
       for i in range(len(quantile_r)):
         QR.append(quantile_r.array[i])
       self.values['residual_quantiles']= QR
+      self.values["Parameters"]= 'N/A'
+      self.values["distribution_fitted"]= 'N/A'
       return QR
 
 
@@ -400,6 +412,10 @@ class SFeaturizing (TS_Featurizing):
      parameters.append(param)
 
      self.values["Parameters"]=parameters
+     self.values["residual_quantiles"]= 'N/A'
+     self.values['seasonality']= 'N/A'
+     self.values['linear_regression_slope']= 'N/A'
+     self.values['linear_regression_intercept']= 'N/A'
      
      return dist_name, parameters
 

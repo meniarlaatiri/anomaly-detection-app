@@ -8,6 +8,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { FooterComponent } from './footer/footer.component';
 
 import {HttpClientModule} from '@angular/common/http';
+import {ChartsModule} from 'ng2-charts';
 
 import {FormsModule,ReactiveFormsModule} from '@angular/forms';
 import { DescriptionComponent } from './description/description.component'
@@ -24,7 +25,8 @@ import { DescriptionComponent } from './description/description.component'
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
