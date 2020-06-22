@@ -33,7 +33,7 @@ def upload():
     Time_serie={}
     Time_serie_1=key.TS_Featurizing(namefile,colonne1,colonne2,format_date,Time_serie)
     Time_serie_1.load_and_save_data()
-
+   
     #common descriptors
     Time_serie_1.std()
     Time_serie_1.min()
@@ -71,6 +71,7 @@ def upload():
     new_model= load_model ('LSTM_model.h5')
     dateparse = lambda x: pd.datetime.strptime(x, format_date)
     df1= pd.read_csv('instance\\uploads\\'+ namefile, parse_dates=[colonne1], date_parser=dateparse,usecols=[colonne1,colonne2], index_col=0, sep=';')
+    df1= df1.dropna()
     new_test_set=key.get_window(df1[colonne2].values, backward=4)
     print(new_test_set)
     print("model loaded !")
@@ -87,10 +88,19 @@ def upload():
     test_score_df1['loss'] = dist1
     test_score_df1['threshold'] = threshold
     test_score_df1['anomaly'] = test_score_df1.loss > test_score_df1.threshold
-    test_score_df1['a_withdr'] = test[4:].a_withdr
+    test_score_df1['amount'] = test[4:].a_withdr
     anomalies = test_score_df1[test_score_df1.anomaly == True]
     print(anomalies)
-
+    anomalies_y=anomalies["amount"].values.tolist()
+    anomalies_x=anomalies.index.strftime('%d/%m/%Y').tolist()
+    anomalies_points=[]
+    for i in range(len(anomalies_x)):
+       di=[]
+       di.append(anomalies_x[i])    
+       di.append(anomalies_y[i])     
+       anomalies_points.append(di)
+    m=json.dumps([{'x':anomalies_x,'y':anomalies_y} for anomalies_x,anomalies_y in anomalies_points])
+    Time_serie['anomalies']=m
     x=key.to_json(Time_serie)
 
     #return jsonify(x)

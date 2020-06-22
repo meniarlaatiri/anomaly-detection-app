@@ -119,18 +119,51 @@ class TS_Featurizing :
     df=self.load_and_save_data()
     decomp = statsmodels.tsa.seasonal.seasonal_decompose(df, model='Additive')
     trend = decomp.trend
+    trend= trend.dropna().to_frame()
+    y_trend=trend["trend"].values.tolist()
+    x_trend=trend.index.strftime(self.date_format).tolist()
+    trend_data=[]
+    for i in range(len(x_trend)):
+      di=[]
+      di.append(x_trend[i]) 
+      di.append(y_trend[i])    
+      trend_data.append(di)
+    T=json.dumps([{'x':x_trend,'y':y_trend} for x_trend,y_trend in trend_data])
+    self.values['trend']=T
     return trend
 
   def SEASONAL_decompose(self):
     df=self.load_and_save_data()
     decomp = statsmodels.tsa.seasonal.seasonal_decompose(df, model='Additive')
     seasonal = decomp.seasonal
+    seasonal = seasonal.dropna().to_frame()
+    y_seasonal=seasonal["seasonal"].values.tolist()
+    x_seasonal=seasonal.index.strftime(self.date_format).tolist()
+    seasonal_data=[]
+    for i in range(len(x_seasonal)):
+      di=[]
+      di.append(x_seasonal[i]) 
+      di.append(y_seasonal[i])    
+      seasonal_data.append(di)
+    T=json.dumps([{'x':x_seasonal,'y':y_seasonal} for x_seasonal,y_seasonal in seasonal_data])
+    self.values['seasonal']=T
     return seasonal
 
   def RESIDUAL_decompose(self):
     df=self.load_and_save_data()
     decomp = statsmodels.tsa.seasonal.seasonal_decompose(df, model='Additive')
     resid = decomp.resid
+    resid = resid.dropna().to_frame()
+    y_resid = resid["resid"].values.tolist()
+    x_resid = resid.index.strftime(self.date_format).tolist()
+    resid_data=[]
+    for i in range(len(x_resid)):
+      di=[]
+      di.append(x_resid[i]) 
+      di.append(y_resid[i])    
+      resid_data.append(di)
+    T=json.dumps([{'x':x_resid ,'y':y_resid } for x_resid ,y_resid  in resid_data])
+    self.values['redsi']=T
     return resid
 
   def autocorrelation(self):
@@ -457,3 +490,6 @@ def get_window(series, backward=5, forward=0, slide=1, pad=False):
             sliding_window.append(window)
 
     return np.array(sliding_window)
+
+
+   

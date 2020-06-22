@@ -6,6 +6,9 @@
         text-align:center;
     }
     table { table-layout: fixed; }
+   h4{
+    color:rgb(53, 101, 141);
+   }
     
 </style>
 <main role="main">
@@ -29,7 +32,22 @@
         
      <div class="container">
             <h1>Analyse de la série Temporelle</h1><br>
+            <h4>Tendance de la série :</h4>
+            <div style="width:900px; height:600px;margin-left: 80px;">
+                <canvas id="Trend_Chart"></canvas>
+            </div>
+            <h4>Saisonnalité de la série :</h4>
+            <div style="width:900px; height:600px;margin-left: 80px;">
+                <canvas id="seasonal_Chart"></canvas>
+            </div>
+            <h4>Rédisu de la série :</h4>
+            <div style="width:900px; height:600px;margin-left: 80px;">
+                <canvas id="Resid_Chart"></canvas>
+            </div>
+            
         <div class="table-responsive">
+            <h4>Les déscripteurs de la série :</h4> <br>
+
           <table class="table">
           <thead>
             <tr>
@@ -71,6 +89,10 @@
                 <td>{{row_descripteur.p_value_for_AR}}</td>
             </tr>
             <tr>
+                <td>Spectre du transformée de Fourier</td>
+                <td><strong>Les coefficients du spectre du transformée de Fourier:</strong><br>{{row_descripteur.FFT_coeff}}</td>
+            </tr>
+            <tr>
                 <td style="color:rgb(51, 161, 255);"><strong>Stationnarité</strong></td>
                 <td style="color:rgb(51, 161, 255);"><strong>{{row_descripteur.stationnarity}}</strong></td>
             </tr>
@@ -95,9 +117,15 @@
         </div>
     </div>
     <br>
+
     <div class="container">
         <h1>Détéction des anomalies pour la série Temporelle</h1><br>
-    </div>
+        <div style="width:1150px;">
+       
+               <canvas id="anomliesChart"></canvas>
+           
+           </div>
+       </div>
  
 </main>
 

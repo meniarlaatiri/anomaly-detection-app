@@ -217,10 +217,6 @@ class TS_Featurizing :
     self.values['fourier_initial_y']=filtered_signal
     return("Regeneration of the initial signal : ", xts1, filtered_signal)
 
-
-
-
-
 class NSFeaturizing (TS_Featurizing):
    def Linear_reg_trend(self):
       df=self.load_and_save_data()
