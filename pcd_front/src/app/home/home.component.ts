@@ -32,6 +32,8 @@ export class HomeComponent implements OnInit {
   onFileSelected(event){
     this.selectedFile =<File>event.target.files[0];
   }
+ 
+  //Enregister les données reçus par le formulaire 
 
 
   savefile(){
@@ -40,10 +42,16 @@ export class HomeComponent implements OnInit {
     console.log(data)
     fd.append('file',this.selectedFile, this.selectedFile.name);
     fd.append('data', JSON.stringify(data));
+
+    // envoyer une requetes post ( consommation d'un REST API + methode post en passant en parametre la format de data et le fichier csv)
     this.http.post("http://127.0.0.1:5000/upload",fd).subscribe(res =>{
       this.row_descripteur= res ;
       this.row_descripteur = JSON.stringify(this.row_descripteur);
+
+    // enregister le résultat de la consommation de l API REST dans lo
       localStorage.setItem("data",this.row_descripteur);
+
+    //se déplacer vers le composant description
       this.router.navigate(['/description']);
    },
     error =>{

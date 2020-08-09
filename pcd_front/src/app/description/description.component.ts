@@ -15,13 +15,16 @@ export class DescriptionComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
+     //récupérer les données enregistré dans le localStorage avec le key data
+
       this.row_descripteur = localStorage.getItem("data");
       this.row_descripteur = JSON.parse(this.row_descripteur);
     //if (this.row_descripteur.stationnarity==true){
      // this.row_descripteur_NST=this.row_descripteur.min , this.row_descripteur.max ;
      console.log(this.row_descripteur)
   
-  
+  // visualiser les données récupérés dans des courbes ( ici utilisation de la bibliothéque chart.js pour la visualisation avec angular)
 var dataSample1 = JSON.parse(this.row_descripteur.dataset);   
 var dataSample2 = JSON.parse(this.row_descripteur.anomalies); 
 var dataSample3 = JSON.parse(this.row_descripteur.trend);
